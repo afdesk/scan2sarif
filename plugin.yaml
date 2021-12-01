@@ -1,0 +1,11 @@
+name: "scan2sarif"
+repository: github.com/afdesk/scan2sarif
+version: "0.0.1"
+usage: scan targets into a sarif file
+description: |-
+  A Trivy plugin that scans and outpus the results to a sarif file.
+  trivy scan2sarif [-h,--help] command target filename
+platforms:
+  -
+    uri: https://github.com/afdesk/scan2sarif/releases/download/v0.0.1/scan2sarif.tar.gz
+    bin: ./scan2sarif

@@ -1,10 +1,9 @@
-# scan2sarif
-A Trivy plugin that scans and outputs the results to a sarif file.
-## Install
-```sh
-$ trivy plugin install github.com/afdesk/scan2sarif
+#!/bin/bash
 
-$ trivy scan2sarif -h
+# help
+function help() {
+  cat << EOS >&2
+scan2sarif v0.0.1
 
 Usage: trivy scan2sarif [-h,--help] command target filename
  A Trivy plugin that scans and outputs the results to a sarif file.
@@ -16,4 +15,17 @@ Examples:
 
   # Scan local folder
   trivy scan2sarif fs . result.sarif
-```
+EOS
+  exit
+}
+
+function scan {
+  BASEDIR=$(dirname "$0")
+  trivy $1 --format template --template @$BASEDIR/sarif.tpl --output $3 $2
+}
+
+if [[ ($# -eq 0) || ($1 == "--help") || ($1 == "-h") ]]; then
+  help
+fi
+
+scan "$@"
